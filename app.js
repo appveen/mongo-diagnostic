@@ -130,6 +130,8 @@ function connectMongooseAppcenter() {
 async function init() {
 
     logger.info('======================================================');
+    logger.info(`IMAGE TAG : ${process.env.IMAGE_TAG}`);
+    logger.info('======================================================');
     logger.info('ENV Variables');
     logger.info('======================================================');
     logger.info(config);

@@ -12,7 +12,11 @@ COPY package.json package.json
 RUN npm install --production
 RUN npm audit fix
 
-COPY . .
+COPY app.js app.js
+
+COPY config.js config.js
+
+ENV IMAGE_TAG=__image_tag__
 
 EXPOSE 8080
 
