@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-diagnostic
+  namespace: __namespace__
+spec:
+  type: ClusterIP
+  selector:
+    app: mongo-diagnostic
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-diagnostic
+  namespace: __namespace__
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-diagnostic
+  template:
+    metadata:
+      labels:
+        app: mongo-diagnostic
+    spec:
+      containers:
+        - name: mongo-diagnostic
+          image: "appveen/mongo-diagnostic:1.0.0"
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: config
