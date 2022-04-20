@@ -1,7 +1,7 @@
 const express = require('express');
 const log4js = require('log4js');
 const mongoose = require('mongoose');
-const { MongoClient } = require('mongodb');
+const { MongoClient, Logger } = require('mongodb');
 
 const config = require('./config');
 
@@ -14,6 +14,8 @@ log4js.configure({
 const app = express();
 const logger = log4js.getLogger('Server');
 
+Logger.setLevel('debug');
+mongoose.set('debug', true)
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
